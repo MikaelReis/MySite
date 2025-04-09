@@ -4,9 +4,10 @@ from faker import Factory as FakerFactory
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
-from blog.models import Post
+from blog_old.models import Post
 
 faker = FakerFactory.create()
+
 
 class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -23,7 +24,8 @@ class UserFactory(factory.django.DjangoModelFactory):
             user.set_password(password)
             if create:
                 user.save()
-        return user
+            return user
+
 
 class PostFactory(factory.django.DjangoModelFactory):
     title = factory.LazyAttribute(lambda x: faker.sentence())
@@ -33,4 +35,3 @@ class PostFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Post
-
